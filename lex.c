@@ -61,3 +61,21 @@ lex()
         }
     }
 }
+static int Lookahead = -1;
+int token;
+int match(token)
+{
+        if(Lookahead == -1)
+            Lookahead = lex();
+    return token == Lookahead;
+}
+    
+void advance()
+{
+    Lookahead = lex();
+}
+    
+main()
+{
+    statements();
+}
