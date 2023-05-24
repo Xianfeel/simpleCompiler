@@ -75,3 +75,49 @@ factor()
   else
     fprintf(stderr,"%d Number or identifier expected\n",yylineno);
 }
+
+#include<stdarg.h>
+
+#define MAXFIRST 16
+#define SYNCH SEMI
+int legal_lookahead(int first_arg)
+{
+   /*23(41/986) */
+  va_list args;
+  int tok;
+  int lookaheads[MAXFIRST],*P = lookaheads,*current;
+  int error_printed = 0;
+  int rval = 0;
+  va_start(args,first_arg);
+  
+  if(!first_arg)
+  {
+    if(match(EOI))
+      rval = 1;
+  }
+  else
+  {
+    *p++ = first_arg;
+    while((tok == va_arg(args,int)) && p < &lookaheads[MAXFIRST])
+      *++p = tok;
+    while(!match(SYNCH))
+    {
+      for(current = lookaheads;current<p;++current)
+        if(match(*current))
+        {
+          rval = 1;
+          goto exit;
+        }
+      if(!error_printed）
+        {
+           fprintf(stderr,"Line %d:Syntax error\n",yylineno);
+           error_printed = 1;
+        }
+         
+         advance();
+    }
+  }
+  exit:
+         va_end(args)
+         return rval;
+}
