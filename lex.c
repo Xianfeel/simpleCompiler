@@ -62,8 +62,8 @@ lex()
     }
 }
 static int Lookahead = -1;
-int token;
-int match(token)
+
+int match(int token)
 {
         if(Lookahead == -1)
             Lookahead = lex();
