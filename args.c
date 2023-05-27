@@ -27,8 +27,7 @@ statements()
   }
 }
 
-void expression(tempvar)
-char * tempvar;
+void expression(char * tempvar;)
 {
 /* expression->term expression'
  * expression'->PLUS term expression' | epsilon
